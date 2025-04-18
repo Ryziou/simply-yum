@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title>All Recipes | Simply Yum</title>
+</head>
+<body>
+    <%- include('../partials/nav') %>
+    <h1>Recipes</h1>
+    <main>
+        <div class="recipe-container">
+            <% allRecipes.forEach(recipe => { %>
+                <div class="recipe-card">
+                    <a href="/recipes/<%= recipe.id %>">
+                        <h2><%= recipe.title %></h2>
+                    </a>
+                    <img src="<%= recipe.imageUrl %>" width="300">
+                    <p><%= recipe.category %></p>
+                    <p><%= recipe.cookTime %></p>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+</body>
+</html>

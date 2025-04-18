@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title>Sign In | Simply Yum</title>
+</head>
+<body>
+    <%- include('../partials/nav') %>
+    <h1>Sign In</h1>
+    <form action="/auth/sign-in" method="POST">
+        <div class="input-control">
+            <label for="identity">Username or email:</label>
+            <input type="text" name="identity" id="identity" required>
+        </div>
+
+        <div class="input-control">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+
+        <% if (errorMessage) { %>
+         <p class="error-message"><%= errorMessage %></p>
+        <% } %>
+
+        <button type="submit">Sign In</button>
+    </form>
+</body>
+</html>

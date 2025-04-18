@@ -1,0 +1,33 @@
+<header>
+  <div class="top-navigation">
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="/recipes">Recipes</a>
+      <% if (user) { %>
+        <a href="/recipes/new">Create Recipe</a>
+      <% } %>
+    </div>
+    <div class="register">
+      <% if (user) { %>
+        <div class="profile-dropdown">
+          <img src="<%= user.avatar || 'https://res.cloudinary.com/dit5y4gaj/image/upload/v1744893994/17c9a5d1-2894-4502-b45a-e7ae4384fe78.png' %>" class="profile-pic" alt="Profile">
+          <div class="dropdown-content">
+            <a href="/profile/<%= user.username %>"><%= user.username %></a>
+            <a href="/auth/sign-out">Sign Out</a>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="profile-dropdown">
+          <img src="https://res.cloudinary.com/dit5y4gaj/image/upload/v1744893994/17c9a5d1-2894-4502-b45a-e7ae4384fe78.png" class="profile-pic" alt="Sign In">
+          <div class="dropdown-content">
+            <a href="/auth/sign-in">Sign In</a>
+            <a href="/auth/sign-up">Sign Up</a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  <div class="brand-logo">
+    <img src="https://res.cloudinary.com/dit5y4gaj/image/upload/v1744902742/27a7d2a9-c79f-42f0-83f4-b9f90fce0c73.png" alt="Logo">
+  </div>
+</header>

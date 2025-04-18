@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title><%= recipe.title %> | Simply Yum</title>
+</head>
+<body>
+    <%- include('../partials/nav') %>
+    <img src="<%= recipe.imageUrl %>" alt="Preview" width="300">
+    <h1><%= recipe.title %></h1>
+    <p>By
+        <a href="/profile/<%= recipe.createdBy.username %>">
+            <%= recipe.createdBy.username %>
+        </a>
+    </p>
+    <p><%= recipe.description %></p>
+    <ul class="instructions"><% recipe.instructions.forEach(instruc => { %>
+        <li> <%= instruc %></li>
+    <% }); %>
+    </ul>
+    <ul class="ingredients"><% recipe.ingredients.forEach(ingr => { %>
+        <li> <%= ingr %></li>
+    <% }); %>
+    </ul>
+
+    <% if (user && recipe.createdBy.equals(user._id)) { %>
+        <form action="/recipes/<%= recipe._id %>/edit">
+            <button type="submit">Edit</button>
+        </form>
+        <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    <% } %>
+
+    <div class="interaction">
+        <small><%= recipe.favourites.length %></small>
+        <% if (user && recipe.favourites.find(favId => favId.equals(user._id))) { %>
+            <form action="/recipes/<%= recipe._id %>/fav?_method=DELETE" method="POST">
+                <button class="fav-btn" type="submit">★</button>
+            </form>
+        <% } else { %>
+        <form action="/recipes/<%= recipe._id %>/fav" method="POST">
+            <button class="fav-btn" type="submit">☆</button>
+        </form>
+        <% } %>
+    </div>
+    <div class="comment-section">
+        <div class="comments">
+            <% recipe.comments.reverse().forEach(comment => { %>
+                <div class="comment">
+                    <div class="top-bar">
+                    <h3><%= comment.createdBy.username %></h3>
+                </div>
+                    <p title="<%= comment.formatDate.fullDate %>"><%= comment.formatDate.shortDate %></p>
+                    <p><%= comment.content %></p>
+                    <% if (user && comment.createdBy.equals(user._id)) { %>
+                        <form action="/recipes/<%= recipe._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                            <button class="delete-btn" type="submit">🗑️</button>
+                        </form>
+                    <% } %>
+                </div>
+           <% }); %>
+        </div>
+    <% if (user) { %>
+        <form action="/recipes/<%= recipe._id %>/comments" method="POST" class="comment-section">
+            <label for="content">Leave a comment:</label><br>
+            <textarea name="content" id="content"></textarea>
+            <% if (errorMessage) { %>
+             <p class="error-message"><%= errorMessage %></p>
+            <% } %>
+            <button type="submit">Submit</button>
+        </form>
+    <% } else { %>
+    <form action="/recipes/<%= recipe._id %>/comments" method="POST" class="comment-section">
+        <label for="content">Leave a comment:</label><br>
+        <textarea name="content" id="content" placeholder="Sign in to leave a comment" disabled></textarea>
+        <% if (errorMessage) { %>
+         <p class="error-message"><%= errorMessage %></p>
+        <% } %>
+    <% } %>
+    </form>
+    </div>
+</body>
+</html>
