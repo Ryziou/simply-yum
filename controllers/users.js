@@ -26,7 +26,7 @@ router.get('/auth/sign-in', checkIfSignedOut, (req, res) => {
 
 router.post('/auth/sign-in', checkIfSignedOut, async (req, res) => {
     try {
-        console.log(req.body);
+        console.log('req.body:', req.body);
         
         const identity = req.body.identity.toLowerCase()
         const findUser = await User.findOne( identity.includes('@') ? { email: identity} : { username: identity });
