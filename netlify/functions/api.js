@@ -60,7 +60,6 @@ async function startTheServer() {
         await mongoose.connect(process.env.MONGODB_URI)
         console.log('🚪 Server has been established. 🚪');
         
-        )
     } catch (error) {
         console.error(error);
         
