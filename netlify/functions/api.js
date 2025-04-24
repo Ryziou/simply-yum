@@ -1,3 +1,4 @@
+import serverless from 'serverless-http'
 import express from 'express'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
@@ -8,21 +9,19 @@ import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
 // Routers
-import homeRouter from './controllers/home.js'
-import recipeRouter from './controllers/recipes.js'
-import userRouter from './controllers/users.js'
-import profileRouter from './controllers/profile.js'
-import commentRouter from './controllers/comments.js'
+import homeRouter from '../../controllers/home.js'
+import recipeRouter from '../../controllers/recipes.js'
+import userRouter from '../../controllers/users.js'
+import profileRouter from '../../controllers/profile.js'
+import commentRouter from '../../controllers/comments.js'
 
 // Middleware
-import passErrorToView from './middleware/passErrorToView.js'
-import passUserToView from './middleware/passUserToView.js'
-import dateTime from './middleware/dateTime.js'
-import capitalizeWords from './middleware/capitalizeWords.js'
-
+import passErrorToView from '../../middleware/passErrorToView.js'
+import passUserToView from '../../middleware/passUserToView.js'
+import dateTime from '../../middleware/dateTime.js'
+import capitalizeWords from '../../middleware/capitalizeWords.js'
 
 const app = express()
-const port = process.env.PORT
 
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
@@ -51,7 +50,7 @@ app.use('/', userRouter)
 app.use('/', commentRouter)
 app.use('/', recipeRouter)
 
-
+const port = 3000
 
 app.get('/{*any}', (req, res) => {
     res.status(404).render('404.ejs')
@@ -62,7 +61,6 @@ async function startTheServer() {
         await mongoose.connect(process.env.MONGODB_URI)
         console.log('🚪 Server has been established. 🚪');
         
-        app.listen(port, () => console.log('🚄 Server has started!')
         )
     } catch (error) {
         console.error(error);
@@ -70,3 +68,5 @@ async function startTheServer() {
     }
 }
 startTheServer()
+
+export const handler = serverless(app)
