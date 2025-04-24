@@ -93,7 +93,7 @@ router.post('/recipes', checkIfSignedIn, parser.single('imageUrl'), async (req, 
 router.put('/recipes/:recipeId', checkIfSignedIn, parser.single('imageUrl'), async (req, res, next) => {
     try {
         const { recipeId } = req.params
-        req.body.imageUrl = req.file.path
+        if (req.file) req.body.imageUrl = req.file.path
 
         if (!mongoose.isValidObjectId(recipeId)) return next()
 

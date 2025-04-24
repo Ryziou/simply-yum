@@ -29,7 +29,7 @@ router.post('/auth/sign-in', checkIfSignedOut, async (req, res) => {
         const identity = req.body.identity
         const findUser = await User.findOne( identity.includes('@') ? { email: identity} : { username: identity });
         if (!findUser) return res.status(401).render('auth/sign-in.ejs', {
-            errorMessage: 'Unauthorized'
+            errorMessage: 'User does not exist.'
         })
 
         if (!bcrypt.compareSync(req.body.password, findUser.password)) {

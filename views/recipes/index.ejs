@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/main.css">
     <title>All Recipes | Simply Yum</title>
 </head>
+
 <body>
     <%- include('../partials/nav') %>
-    <h1>Recipes</h1>
-    <main>
-        <div class="recipe-container">
-            <% allRecipes.forEach(recipe => { %>
-                <div class="recipe-card">
-                    <a href="/recipes/<%= recipe.id %>">
-                        <h2><%= recipe.title %></h2>
-                    </a>
-                    <img src="<%= recipe.imageUrl %>" width="300">
-                    <p><%= recipe.category %></p>
-                    <p><%= recipe.cookTime %></p>
-                </div>
-            <% }) %>
-        </div>
-    </main>
+        <h1 class="text-center">All Recipes</h1>
+        <main>
+            <div class="recipe-grid">
+                <% allRecipes.forEach(recipe => { %>
+                    <div class="recipe-card">
+                        <a href="/recipes/<%= recipe.id %>">
+                            <div class="recipe-image-container">
+                                <img src="<%= recipe.imageUrl %>" alt="<%= capitalizeWords(recipe.title) %>" class="recipe-image">
+                            </div>
+                            <div class="recipe-info">
+                                <div class="recipe-title">
+                                <span><%= capitalizeWords(recipe.title) %></span>
+                                <span><%= recipe.favourites.length %> ★</span>
+                            </div>
+                                <div class="recipe-meta">
+                                    <span><%= capitalizeWords(recipe.category) %></span>
+                                    <span><%= recipe.cookTime %> min(s)</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        </main>
 </body>
+
 </html>

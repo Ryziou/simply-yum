@@ -8,6 +8,7 @@ import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
 // Routers
+import homeRouter from './controllers/home.js'
 import recipeRouter from './controllers/recipes.js'
 import userRouter from './controllers/users.js'
 import profileRouter from './controllers/profile.js'
@@ -17,6 +18,7 @@ import commentRouter from './controllers/comments.js'
 import passErrorToView from './middleware/passErrorToView.js'
 import passUserToView from './middleware/passUserToView.js'
 import dateTime from './middleware/dateTime.js'
+import capitalizeWords from './middleware/capitalizeWords.js'
 
 
 const app = express()
@@ -38,13 +40,17 @@ app.use(session({
 app.use(passErrorToView)
 app.use(passUserToView)
 app.use(dateTime)
+app.locals.capitalizeWords = capitalizeWords
 
 
-app.get('/', (req, res) => {
-    res.render('index.ejs', {
-        user: req.session.user
-    })
-})
+// app.get('/', (req, res) => {
+//     res.render('index.ejs', {
+//         user: req.session.user,
+//         allRecipes: Recipe.find()
+//     })
+// })
+app.get('/', homeRouter)
+
 app.use('/', profileRouter)
 app.use('/', userRouter)
 app.use('/', commentRouter)

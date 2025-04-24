@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="/stylesheets/pages/profile.css">
+    <title>
+        <%= profileUser.username %> | Simply Yum
+    </title>
+</head>
+
+<body>
+    <%- include('../partials/nav.ejs') %>
+        <main class="profile text">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <img src="<%= profileUser.avatar %>" alt="<%= profileUser.username %>'s profile image" class="profile-avatar" width="300">
+                </div>
+                <form action="/profile/<%= user._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                    <div class="input-control">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" value="<%= profileUser.username %>">
+                    </div>
+                    <div class="input-control">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" value="<%= profileUser.email %>">
+                    </div>
+                    <div class="input-control">
+                        <label for="avatar">Profile Image</label>
+                        <input type="file" name="avatar" id="avatar" accept="image/*" preview>
+                    </div>
+                    <div class="input-control">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+
+                    <button type="submit">Update</button>
+                </form>
+
+            </div>
+        </main>
+</body>
+
+</html>
