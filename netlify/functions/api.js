@@ -28,6 +28,10 @@ const port = process.env.PORT || 3000
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: false }))
+app.use((req, res, next) => {
+  console.log(req.body)
+  next()
+})
 app.use(express.static('public'))
 app.use(session({
     secret: process.env.SESSION_SECRET,
