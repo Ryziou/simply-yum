@@ -1,5 +1,6 @@
 const addIngredientsBtn = document.getElementById('add-ingredients')
 const addInstructionsBtn = document.getElementById('add-instructions')
+const recipeForm = document.querySelector('.create-recipe-form')
 
 if (addIngredientsBtn) {
     addIngredientsBtn.addEventListener('click', function() {
@@ -49,6 +50,25 @@ if (addInstructionsBtn) {
 
 
         instructionRow.appendChild(inputContainer)
+    })
+}
+
+if (recipeForm) {
+    recipeForm.addEventListener('submit', function() {
+
+        const ingredientChecker = recipeForm.querySelectorAll('input[name="ingredients"]');
+        ingredientChecker.forEach(inputChecker => {
+            if (inputChecker.value.trim() === '') {
+                inputChecker.parentElement.remove();
+            }
+        })
+        const instructionChecker = recipeForm.querySelectorAll('textarea[name="instructions"]')
+        instructionChecker.forEach(inputChecker => {
+            if (inputChecker.value.trim() === '') {
+                inputChecker.parentElement.remove()
+            }
+        })
+
     })
 }
 
