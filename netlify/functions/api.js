@@ -22,6 +22,7 @@ import dateTime from '../../middleware/dateTime.js'
 import capitalizeWords from '../../middleware/capitalizeWords.js'
 
 const app = express()
+const port = process.env.PORT || 3000
 
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
@@ -49,8 +50,6 @@ app.use('/', profileRouter)
 app.use('/', userRouter)
 app.use('/', commentRouter)
 app.use('/', recipeRouter)
-
-const port = 3000
 
 app.get('/{*any}', (req, res) => {
     res.status(404).render('404.ejs')
