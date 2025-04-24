@@ -12,27 +12,31 @@
     <%- include('../partials/nav') %>
         <h1 class="text-center">Top Favourited Recipes</h1>
         <main>
-            <div class="recipe-grid">
-                <% favRecipes.forEach(recipe => { %>
-                    <div class="recipe-card">
-                        <a href="/recipes/<%= recipe.id %>">
-                            <div class="recipe-image-container">
-                                <img src="<%= recipe.imageUrl %>" alt="<%= capitalizeWords(recipe.title) %>" class="recipe-image">
-                            </div>
-                            <div class="recipe-info">
-                                <div class="recipe-title">
-                                <span><%= capitalizeWords(recipe.title) %></span>
-                                <span><%= recipe.favourites.length %> ★</span>
-                            </div>
-                                <div class="recipe-meta">
-                                    <span><%= capitalizeWords(recipe.category) %></span>
-                                    <span><%= recipe.cookTime %> min(s)</span>
+            <% if (favRecipes && favRecipes.length > 0) { %>
+                <div class="recipe-grid">
+                    <% favRecipes.forEach(recipe => { %>
+                        <div class="recipe-card">
+                            <a href="/recipes/<%= recipe.id %>">
+                                <div class="recipe-image-container">
+                                    <img src="<%= recipe.imageUrl %>" alt="<%= capitalizeWords(recipe.title) %>" class="recipe-image">
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                <% }) %>
-            </div>
+                                <div class="recipe-info">
+                                    <div class="recipe-title">
+                                    <span><%= capitalizeWords(recipe.title) %></span>
+                                    <span><%= recipe.favourites.length %> ★</span>
+                                </div>
+                                    <div class="recipe-meta">
+                                        <span><%= capitalizeWords(recipe.category) %></span>
+                                        <span><%= recipe.cookTime %> min(s)</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <span>You haven't favourited any recipes yet </span>
+            <% } %>
         </main>
         <%- include('../partials/footer') %>
 </body>

@@ -58,7 +58,13 @@
 
 .recipe-columns {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.recipe-column {
+    flex: 1;
 }
 
 .column-title {
@@ -85,6 +91,46 @@
 .recipe-item.empty {
     color: #999;
     font-style: italic;
+}
+
+.input-control-edit {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-control-edit input[type=text], .input-control-edit input[type=email], .input-control-edit input[type=password] {
+    display: flex;
+    width: 100%;
+    padding: 12px 12px 12px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+}
+
+.input-control-edit input[type=file], i {
+    padding-left: 25%;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-update {
+    height: 45px;
+    border: 0;
+    color: #fff;
+    background-color: #45a31f;
+    border-radius: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: inherit;
+    padding: 0 24px;
+}
+
+.btn-update:hover {
+    background-color: #10af02c2;
 }
 
 @media (max-width: 768px) {

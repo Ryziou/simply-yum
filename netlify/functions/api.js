@@ -21,13 +21,14 @@ import passErrorToView from '../../middleware/passErrorToView.js'
 import passUserToView from '../../middleware/passUserToView.js'
 import dateTime from '../../middleware/dateTime.js'
 import capitalizeWords from '../../middleware/capitalizeWords.js'
+import bodyParser from '../../middleware/bodyParser.js'
 
 const app = express()
 const port = process.env.PORT || 3000
 
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
-app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser)
 app.use((req, res, next) => {
   console.log(req.body)
   next()

@@ -15,13 +15,6 @@
     <%- include('../partials/nav.ejs') %>
         <main class="profile">
             <div class="profile-container">
-                <div class="profile-header">
-                    <img src="<%= profileUser.avatar || 'https://res.cloudinary.com/dit5y4gaj/image/upload/v1744893994/17c9a5d1-2894-4502-b45a-e7ae4384fe78.png' %>" alt="<%= profileUser.username %>'s profile image"
-                        class="profile-avatar" width="300">
-                    <h1 class="profile-name">
-                        <%= capitalizeWords(profileUser.username) %>
-                    </h1>
-                </div>
                 <% if (user && currentUser._id === profileUser._id.toString()){ %>
                     <div class="profile-actions">
                         <form action="/profile/<%= user._id %>/edit">
@@ -32,6 +25,13 @@
                         </form>
                     </div>
                     <% } %>
+                <div class="profile-header">
+                    <img src="<%= profileUser.avatar || 'https://res.cloudinary.com/dit5y4gaj/image/upload/v1744893994/17c9a5d1-2894-4502-b45a-e7ae4384fe78.png' %>" alt="<%= profileUser.username %>'s profile image"
+                        class="profile-avatar" width="300">
+                    <h1 class="profile-name">
+                        <%= capitalizeWords(profileUser.username) %>
+                    </h1>
+                </div>
 
                 <div class="recipe-columns">
                     <div class="recipe-column">
@@ -50,6 +50,7 @@
                                 <li class="recipe-item empty">No recipes created yet.</li>
                             <% } %>
                         </ul>
+                        </div>
                         <div class="recipe-column">
                             <h2 class="column-title">Favourited Recipes: <%= favRecipes.length %>
                             </h2>
