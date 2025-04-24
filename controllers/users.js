@@ -26,6 +26,8 @@ router.get('/auth/sign-in', checkIfSignedOut, (req, res) => {
 
 router.post('/auth/sign-in', checkIfSignedOut, async (req, res) => {
     try {
+        console.log(req.body);
+        
         const identity = req.body.identity.toLowerCase()
         const findUser = await User.findOne( identity.includes('@') ? { email: identity} : { username: identity });
         if (!findUser) return res.status(401).render('auth/sign-in.ejs', {
