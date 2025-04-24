@@ -42,7 +42,7 @@
                 <p class="recipe-author">By
                     <% if (recipe.createdBy) { %>
                         <a href="/profile/<%= recipe.createdBy.username %>">
-                            <%= recipe.createdBy.username %> 
+                            <%= capitalizeWords(recipe.createdBy.username) %> 
                         </a>
                     <% } else { %>
                         <span>Anonymous</span>
@@ -127,9 +127,9 @@
                             <div class="top-bar">
                                 <% if (comment.createdBy) { %>
                                     <h3>
-                                        <img src="<%= comment.createdBy.avatar %>" alt="Avatar" class="avatar"> 
                                         <a href="/profile/<%= comment.createdBy.username %>" class="username-link">
-                                            <%= comment.createdBy.username %>
+                                        <img src="<%= comment.createdBy.avatar || 'https://res.cloudinary.com/dit5y4gaj/image/upload/v1744893994/17c9a5d1-2894-4502-b45a-e7ae4384fe78.png' %>" alt="Avatar" class="avatar"> 
+                                            <%= capitalizeWords(comment.createdBy.username) %>
                                         </a>
                                     </h3>
                                 <% } else { %>

@@ -26,7 +26,7 @@ router.get('/auth/sign-in', checkIfSignedOut, (req, res) => {
 
 router.post('/auth/sign-in', checkIfSignedOut, async (req, res) => {
     try {
-        const identity = req.body.identity
+        const identity = req.body.identity.toLowerCase()
         const findUser = await User.findOne( identity.includes('@') ? { email: identity} : { username: identity });
         if (!findUser) return res.status(401).render('auth/sign-in.ejs', {
             errorMessage: 'User does not exist.'
@@ -56,15 +56,19 @@ router.post('/auth/sign-in', checkIfSignedOut, async (req, res) => {
 
 router.post('/auth/sign-up', checkIfSignedOut, parser.single('avatar'), async (req, res) => {
     try {
-        req.body.avatar = req.file.path
+        if (req.file) {
+            req.body.avatar = req.file.path
+        }
         
         if (req.body.password !== req.body.passwordChecker) {
             return res.status(422).render('auth/sign-up.ejs', {
                 errorMessage: 'Your passwords do not match!'
             })
         }
-
         req.body.password = bcrypt.hashSync(req.body.password, 12)
+
+        req.body.username = req.body.username.toLowerCase()
+    
         await User.create(req.body)
 
         return res.redirect('/auth/sign-in')
@@ -77,7 +81,7 @@ router.post('/auth/sign-up', checkIfSignedOut, parser.single('avatar'), async (r
             })
         }
         return res.status(400).render('auth/sign-up.ejs', {
-            errorMessage: error.message
+            errorMessage: 'test'
         })
         
     }

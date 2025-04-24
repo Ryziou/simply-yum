@@ -74,16 +74,19 @@ router.put('/profile/:userId', checkIfSignedIn, parser.single('avatar'), async (
         const user = await User.findById(userId)
         if (!user) return next()
         if (!user._id.equals(req.session.user._id)) return res.status(403).send('Not Authorized')
+
         if (req.body.password) {
             req.body.password = bcrypt.hashSync(req.body.password, 12)
         } else {
             delete req.body.password
         }
-
+        if (req.body.username) {
+            req.body.username = req.body.username.toLowerCase()
+        }
         const updateUser = await User.findByIdAndUpdate(userId, req.body, { new: true })
         req.session.user = updateUser
         
-        res.redirect(`/profile/${user.username}`)
+        res.redirect(`/profile/${updateUser.username}`)
     } catch (error) {
         console.log(error);
         

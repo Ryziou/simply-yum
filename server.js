@@ -13,6 +13,7 @@ import recipeRouter from './controllers/recipes.js'
 import userRouter from './controllers/users.js'
 import profileRouter from './controllers/profile.js'
 import commentRouter from './controllers/comments.js'
+import favouriteRouter from './controllers/favourites.js'
 
 // Middleware
 import passErrorToView from './middleware/passErrorToView.js'
@@ -46,10 +47,11 @@ app.locals.capitalizeWords = capitalizeWords
 app.get('/', homeRouter)
 
 // Routers
-app.use('/', profileRouter)
-app.use('/', userRouter)
-app.use('/', commentRouter)
 app.use('/', recipeRouter)
+app.use('/', userRouter)
+app.use('/', profileRouter)
+app.use('/', commentRouter)
+app.use('/', favouriteRouter)
 
 
 

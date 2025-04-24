@@ -16,7 +16,7 @@
         <main class="profile text">
             <div class="profile-container">
                 <div class="profile-header">
-                    <img src="<%= profileUser.avatar %>" alt="<%= profileUser.username %>'s profile image" class="profile-avatar" width="300">
+                    <img src="<%= profileUser.avatar || 'https://res.cloudinary.com/dit5y4gaj/image/upload/v1744893994/17c9a5d1-2894-4502-b45a-e7ae4384fe78.png' %>" alt="<%= profileUser.username %>'s profile image" class="profile-avatar" width="300">
                 </div>
                 <form action="/profile/<%= user._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
                     <div class="input-control">

@@ -6,6 +6,7 @@
       <a href="/recipes">Recipes</a>
       <% if (user) { %>
         <a href="/recipes/new">Create Recipe</a>
+        <a href="/recipes/favourite">Your Favourites</a>
       <% } %>
     </div>
     <div class="register">
@@ -13,7 +14,7 @@
         <div class="profile-dropdown">
           <img src="<%= user.avatar || 'https://res.cloudinary.com/dit5y4gaj/image/upload/v1744893994/17c9a5d1-2894-4502-b45a-e7ae4384fe78.png' %>" class="profile-pic" alt="Profile">
           <div class="dropdown-content">
-            <a href="/profile/<%= user.username %>"><%= user.username %></a>
+            <a href="/profile/<%= user.username %>"><%= capitalizeWords(user.username) %></a>
             <a href="/auth/sign-out">Sign Out</a>
           </div>
         </div>
