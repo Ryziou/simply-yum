@@ -15,17 +15,17 @@
     <%- include('../partials/nav.ejs') %>
         <main class="profile">
             <div class="profile-container">
-                <% if (user && currentUser._id === profileUser._id.toString()){ %>
-                    <div class="profile-actions">
-                        <form action="/profile/<%= user._id %>/edit">
-                            <button type="submit" class="btn btn-edit">Edit</button>
-                        </form>
-                        <form action="/profile/<%= user._id %>?_method=DELETE" method="POST">
-                            <button type="submit" class="btn btn-delete">Delete</button>
-                        </form>
-                    </div>
-                    <% } %>
                 <div class="profile-header">
+                    <% if (user && currentUser._id === profileUser._id.toString()){ %>
+                        <div class="profile-actions">
+                            <form action="/profile/<%= user._id %>/edit">
+                                <button type="submit" class="btn btn-edit">Edit</button>
+                            </form>
+                            <form action="/profile/<%= user._id %>?_method=DELETE" method="POST">
+                                <button type="submit" class="btn btn-delete">Delete</button>
+                            </form>
+                        </div>
+                        <% } %>
                     <img src="<%= profileUser.avatar || 'https://res.cloudinary.com/dit5y4gaj/image/upload/v1744893994/17c9a5d1-2894-4502-b45a-e7ae4384fe78.png' %>" alt="<%= profileUser.username %>'s profile image"
                         class="profile-avatar" width="300">
                     <h1 class="profile-name">
@@ -51,23 +51,22 @@
                             <% } %>
                         </ul>
                         </div>
-                        <div class="recipe-column">
-                            <h2 class="column-title">Favourited Recipes: <%= favRecipes.length %>
-                            </h2>
-                            <ul class="recipe-list">
-                                <% if (favRecipes && favRecipes.length> 0) { %>
-                                    <% favRecipes.forEach(fav=> { %>
-                                        <li class="recipe-item">
-                                            <a href="/recipes/<%= fav._id %>">
-                                                <%= fav.title %>
-                                            </a>
-                                        </li>
-                                <% }) %>
-                                <% } else { %>
-                                    <li class="recipe-item empty">No Favourited recipes yet.</li>
-                                <% } %>
-                            </ul>
-                        </div>
+                    <div class="recipe-column">
+                        <h2 class="column-title">Favourited Recipes: <%= favRecipes.length %>
+                        </h2>
+                        <ul class="recipe-list">
+                            <% if (favRecipes && favRecipes.length> 0) { %>
+                                <% favRecipes.forEach(fav=> { %>
+                                    <li class="recipe-item">
+                                        <a href="/recipes/<%= fav._id %>">
+                                            <%= fav.title %>
+                                        </a>
+                                    </li>
+                            <% }) %>
+                            <% } else { %>
+                                <li class="recipe-item empty">No Favourited recipes yet.</li>
+                            <% } %>
+                        </ul>
                     </div>
                 </div>
             </div>

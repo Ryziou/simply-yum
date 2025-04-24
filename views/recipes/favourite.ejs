@@ -35,7 +35,10 @@
                     <% }) %>
                 </div>
             <% } else { %>
-                <span>You haven't favourited any recipes yet </span>
+                <span class="fav-empty">
+                    You haven't favourited any recipes yet.<br>
+                    Don't forget to add them to your favourites so you can easily find them later!
+                </span>
             <% } %>
         </main>
         <%- include('../partials/footer') %>
