@@ -39,13 +39,15 @@
                     </div>
                 </div>
     
-                <p class="recipe-author">By
+                <p class="recipe-author">
+                    By
                     <% if (recipe.createdBy) { %>
                         <a href="/profile/<%= recipe.createdBy.username %>">
                             <%= capitalizeWords(recipe.createdBy.username) %> 
                         </a>
+                        <p title="<%= recipe.formatDate.fullDate %>" class="recipe-createdAt"><%= recipe.formatDate.shortDate %></p>
                     <% } else { %>
-                        <span>Anonymous</span>
+                        <span>Deleted User</span>
                     <% } %>
                 </p>
     

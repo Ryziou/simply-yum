@@ -99,6 +99,12 @@ body {
   text-decoration: underline;
 }
 
+.recipe-createdAt{
+  font-size: 0.8rem;
+  color: #999;
+  width: 15%;
+}
+
 .recipe-content {
   display: grid;
   grid-template-columns: minmax(300px, 1fr) 2fr;

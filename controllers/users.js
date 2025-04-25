@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.get('/auth/sign-up', checkIfSignedOut, (req, res) => {
     try {
-        return res.status(422).render('auth/sign-up.ejs')
+        return res.render('auth/sign-up.ejs')
     } catch (error) {
         console.log(error);
         
@@ -17,7 +17,7 @@ router.get('/auth/sign-up', checkIfSignedOut, (req, res) => {
 
 router.get('/auth/sign-in', checkIfSignedOut, (req, res) => {
     try {
-        return res.status(422).render('auth/sign-in.ejs')
+        return res.render('auth/sign-in.ejs')
     } catch (error) {
         console.log(error);
         
@@ -81,7 +81,7 @@ router.post('/auth/sign-up', checkIfSignedOut, parser.single('avatar'), async (r
             })
         }
         return res.status(400).render('auth/sign-up.ejs', {
-            errorMessage: 'test'
+            errorMessage: 'Something went wrong. Please try again.'
         })
         
     }
