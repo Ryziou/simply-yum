@@ -8,7 +8,7 @@ This is a website built for food recipes. This was created by using EJS, CSS, an
 
 ## Deployment link
 
-<link to deployment link>
+[Click here to try out the food recipe website!](https://simply-yum.netlify.app/)
 
 ## Getting Started/Code Installation
 
@@ -17,7 +17,7 @@ Clone this repository to your local machine. Open VSC with the folder as a main 
 
 ## Timeframe & Working Team (Solo/Pair/Group)
 
-This project started on 17/04/2025 and I have worked solo on this. It was completed on <date>
+This project started on 17/04/2025 and I have worked solo on this. It was completed on 25/04/2025<date>
 
 
 ## Technologies Used
@@ -27,7 +27,7 @@ This project started on 17/04/2025 and I have worked solo on this. It was comple
     - JavaScript
 
 ### Back End / Development Tools
-    - EJS (Express, Mongoose, Morgan, method-override, express-session, MongoDB, connect-mongo)
+    - EJS (bcriptjs, cloudinary, connect-mongo, dotenv, ejs, express, express-session, method-override, mongoose, morgan, multer, multer-storage-cloudinary, serverless-http)
     - Visual Studio Code
     - Git & GitHub
     - Windows Subsystem for Linux (WSL) with Ubuntu
@@ -39,16 +39,16 @@ This project started on 17/04/2025 and I have worked solo on this. It was comple
 #### Researching & Images
 
 [Google](https://www.google.com/)  
-[MDN Web Docs](https://developer.mozilla.org/en-US/) 
-[Cloudinary for image hosting](https://cloudinary.com/)
-[Mongoose Docs](https://mongoosejs.com/docs/guide.html)
-[Express Node.js](https://expressjs.com/en/5x/api.html)
+[MDN Web Docs](https://developer.mozilla.org/en-US/)  
+[Cloudinary for Image Hosting](https://cloudinary.com/)  
+[Mongoose Docs](https://mongoosejs.com/docs/guide.html)  
+[Express Node.js](https://expressjs.com/en/5x/api.html)  
 [Code Academy](https://www.codecademy.com/)
 
 #### Others
-[MongoDB for database hosting](https://www.mongodb.com/)
-[ChatGPT for Seed DB](https://chatgpt.com/)
-[Netlify for serverless hosting](https://www.netlify.com/)
+[MongoDB for Database Hosting](https://www.mongodb.com/)  
+[ChatGPT for Seed DB](https://chatgpt.com/)  
+[Netlify for Serverless Hosting](https://www.netlify.com/)
 
 
 ## Brief
@@ -64,23 +64,24 @@ This project started on 17/04/2025 and I have worked solo on this. It was comple
 
 
 ## Planning
-### Wireframes
-#### Main
+<details>
+    <summary>Wireframes</summary>
+Main
 
 ![Food Project Wireframe](https://res.cloudinary.com/dit5y4gaj/image/upload/v1744880811/a7e4e911-0da9-4ab3-8366-7d1ae1fe1ed1.png)
 
-#### Profile
+Profile
 
 ![Food Project Profile Wireframe](https://res.cloudinary.com/dit5y4gaj/image/upload/v1744880838/d7d6f940-0271-4b15-b6dc-15986a0feb2f.png)
 
-#### CRUD
+CRUD
 
 ![CRUD Setup Wireframe](https://res.cloudinary.com/dit5y4gaj/image/upload/v1745570904/c1e79443-4911-4b74-b50d-672256e1eac5.png)
 
-#### Models/Schemas
+Models/Schemas
 
 ![Models/Schemas Wireframe](https://res.cloudinary.com/dit5y4gaj/image/upload/v1745570931/3961326c-937c-452b-95ab-5aac17855483.png)
-
+</details>
 
 ## Build/Code Process
 
@@ -100,7 +101,7 @@ export default function dateTime(req, res, next) {
             fullDate: createdDate.toLocaleString('en-US', {
                 month: 'long',
                 day: 'numeric',
-                year: '2-digit',
+                year: 'numeric',
                 hour: 'numeric',
                 minute: '2-digit',
                 hour12: true
@@ -123,6 +124,29 @@ This shows me the shortDate and when I hover over that date, it'll show me the f
 
 No more copy pasting across the site and I can always change the date format etc by only updating one file.
 
+### Home Page
+It took me a while to figure out what to do with my home page. Honestly, I could have just made the ```/recipes``` my home page but I didn't want my website to feel too bland so I thought of two pages.
+
+- Home: To show the top favourited recipes on the website because you would want to tell the clients that "Hey, these are amazing recipes that are the most favourited. Check them out!"
+- Your favourites: This one is more simpler and for a created user only. It will be super better than your profile page. Of course you can see the same things but with the favourite page, you can see the pictures at least!
+
+```js
+router.get('/', async (req, res) => {
+    try {
+        const favRecipes = await Recipe.find({ favourites: { $ne: [] }}).sort({ favourites: -1 })
+        res.render('index.ejs', {
+            favRecipes
+        })
+    } catch (error) {
+        console.error(error);
+    }
+})
+```
+This too me a little while to figure out how to use MongoDB's query conditions. Thankfully, I saw that they do an SQL equivalent for the ```$ne``` version and so that pretty much clicked for me.
+
+### The Most Rewarding Parts
+
+While the code snippets above highlight some of my technical solutions, the most rewarding aspects of this project were actually the challenges I have faced and overcame. Check out the "Challenges" section below to read about my epic CSS battle with the recipe page and how I solved the user profile navigation part. And don't miss the "Bugs" section where I share my mysterious adventure with the form submission bug that fixed itself just as I was asking for help! Sometimes I learned more from the parts that went wrong than the parts that went right. 😊
 
 
 ## Challenges
